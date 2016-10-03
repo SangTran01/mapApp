@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+<body>
+	<div class="container">
+		<div class="listBox">
+            <div class="header">
+                <p id="filter"><strong>Filter</strong></p>
+                <button id="toggleView">Show/Hide</button>
+            </div>
+            
+            <p>Filter: <input data-bind="value: filter, valueUpdate: 'afterkeydown'" /></p>
+            <br>
+            <button id="clearBtn">Clear All</button>
+            <button id="showBtn">Show All</button>
+            <br>
+            
+			<h1>Notable Areas</h1>
+
+			<!-- LIST -->
+			<ul data-bind="foreach: filteredItems">
+                <li data-bind="text: name, click: $parent.openInfowindow"></li>         
+            </ul>
+		</div>
+		<div id="map"></div>
+	</div>
+	
+    <script src="js/lib/knockout-3.2.0.js"></script>
+    <script type="text/javascript" src="js/lib/oauth-signature.min.js"></script>
+    <script type="text/javascript" src="js/script2.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDwycGBmF4bQLa_pSqVoCyfWXRJ1Q6Dxw&callback=initMap"
+    async defer></script>
+</body>
+</html>
