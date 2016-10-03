@@ -104,8 +104,8 @@ var viewModel = function(map){
 
 
     for(var i =0; i < self.locationList().length; i++){
-      var request = getYelpInfo(self.locationList()[i]);
-      console.log(request);
+      var results = getYelpInfo(self.locationList()[i]);
+
     }
 
 
@@ -191,20 +191,17 @@ function generateNonce() {
 **/
 function getYelpInfo(target){
 
-// var YELP_BASE_URL = ''+ target.web +''
-//   ,YELP_CONSUMER_KEY = '6CE4_UfXfQm9XiVp7ftIFg'
-//   ,YELP_TOKEN = 'Zr467MTZq9IT7yQRzv2bOvz6A-aXdcT8'
-//   ,YELP_CONSUMER_SECRET = 'zXvnC2ra4YPE_5KVOMalesiignU' 
-//   ,YELP_TOKEN_SECRET = '  Xw9V5sD5em4ulqeOvCTBUsLxoqI';
 
-var YELP_BASE_URL = ''+ target.name() +'';
+// IS MY LINK INCORRECT PROBLEM??????????????????
+var YELP_BASE_URL = 'http://api.yelp.com/v2/search?';
+
 var YELP_KEY = "6CE4_UfXfQm9XiVp7ftIFg",
     YELP_TOKEN = "Zr467MTZq9IT7yQRzv2bOvz6A-aXdcT8",
     YELP_KEY_SECRET = "zXvnC2ra4YPE_5KVOMalesiignU",
     YELP_TOKEN_SECRET = "Xw9V5sD5em4ulqeOvCTBUsLxoqI";
   
 
-var yelpURL = YELP_BASE_URL;
+var yelpURL = YELP_BASE_URL + target.name();
 
 var parameters = {
   oauth_consumer_key: YELP_KEY,
@@ -213,8 +210,7 @@ var parameters = {
   oauth_timestamp: Math.floor(Date.now()/1000),
   oauth_signature_method: 'HMAC-SHA1',
   oauth_version : '1.0',
-  callback: 'cb',
-  location: yelpURL                   
+  callback: 'cb'                  
   };
   
   
@@ -227,16 +223,14 @@ var settings = {
     data: parameters,
     cache: true,            
     dataType: 'jsonp',
-    //success: function(results) {
-    success: function(results) {
-    //callback(results, target);
-        return results;
+    success: function() {
+
     },
     fail: function() {
     }
     
   };
  
-    return settings;
+    $.ajax(settings);
   
 }
