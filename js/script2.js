@@ -191,9 +191,7 @@ function generateNonce() {
 **/
 function getYelpInfo(target){
 
-
-// IS MY LINK INCORRECT PROBLEM??????????????????
-var YELP_BASE_URL = 'http://api.yelp.com/v2/search?';
+var YELP_BASE_URL = 'http://api.yelp.com/v2/search';
 
 var YELP_KEY = "6CE4_UfXfQm9XiVp7ftIFg",
     YELP_TOKEN = "Zr467MTZq9IT7yQRzv2bOvz6A-aXdcT8",
@@ -201,7 +199,7 @@ var YELP_KEY = "6CE4_UfXfQm9XiVp7ftIFg",
     YELP_TOKEN_SECRET = "Xw9V5sD5em4ulqeOvCTBUsLxoqI";
   
 
-var yelpURL = YELP_BASE_URL + target.name();
+var yelpURL = YELP_BASE_URL;
 
 var parameters = {
   oauth_consumer_key: YELP_KEY,
@@ -210,6 +208,8 @@ var parameters = {
   oauth_timestamp: Math.floor(Date.now()/1000),
   oauth_signature_method: 'HMAC-SHA1',
   oauth_version : '1.0',
+  term: target.name(),
+  limit:1,
   callback: 'cb'                  
   };
   
@@ -223,14 +223,16 @@ var settings = {
     data: parameters,
     cache: true,            
     dataType: 'jsonp',
-    success: function() {
-
+    success: function(results) {
+        console.log(results);
     },
     fail: function() {
     }
     
   };
- 
+    
+    console.log(settings);
     $.ajax(settings);
+    
   
 }
