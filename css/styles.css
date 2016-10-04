@@ -39,3 +39,10 @@ li {
     text-align: left;
     width: 340px;
 }
+
+
+/*INFOBOX*/
+
+#yelpRating {
+    display: block;
+}
